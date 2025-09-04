@@ -18,16 +18,16 @@ import com.bentao.api_produtos.repository.ProdutoRepository;
 @RequestMapping("/produtos")
 
 public class ProdutoController {
-    private final ProdutoRepository repository;
+    private final ProdutoRepository repository;//'final' é igual a imutável - constante
     
     public ProdutoController(ProdutoRepository repository) {
         this.repository = repository;
     }
-}
+
 
 @PostMapping
 public Produto criar(@RequestBody Produto produto){
-    return repository.save(produto); //como assim .save ??
+    return repository.save(produto); //salva o novo produto no repositório
 }
 
 @GetMapping
@@ -36,7 +36,7 @@ public List<Produto> listar() {
 }
 
 @GetMapping("/{id}")
-public Produtos buscar (@PathVariable Long id) {
+public Produto buscar (@PathVariable Long id) {
     return repository.findById(id).orElse(null);
 }
 
@@ -52,4 +52,5 @@ public Produto atualizar (@PathVariable Long id, @RequestBody Produto novoProdut
 @DeleteMapping("/{id}")
 public void excluir(@PathVariable Long id) {
     repository.deleteById(id);
+}
 }
