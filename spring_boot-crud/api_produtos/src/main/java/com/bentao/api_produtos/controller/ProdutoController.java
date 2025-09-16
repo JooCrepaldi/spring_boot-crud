@@ -16,40 +16,39 @@ import com.bentao.api_produtos.repository.ProdutoRepository;
 
 @RestController
 @RequestMapping("/produtos")
-
 public class ProdutoController {
     private final ProdutoRepository repository;
-    
+
     public ProdutoController(ProdutoRepository repository) {
         this.repository = repository;
     }
-}
 
-@PostMapping
-public Produto criar(@RequestBody Produto produto){
-    return repository.save(produto); //como assim .save ??
-}
+    @PostMapping
+    public Produto criar(@RequestBody Produto produto) {
+        return repository.save(produto); // Salva o produto no banco de dados
+    }
 
-@GetMapping
-public List<Produto> listar() {
-    return repository.findAll();
-}
+    @GetMapping
+    public List<Produto> listar() {
+        return repository.findAll(); // Retorna todos os produtos
+    }
 
-@GetMapping("/{id}")
-public Produtos buscar (@PathVariable Long id) {
-    return repository.findById(id).orElse(null);
-}
+    @GetMapping("/{id}")
+    public Produto buscar(@PathVariable Long id) { // Corrigido: "Produtos" para "Produto"
+        return repository.findById(id).orElse(null); // Retorna o produto ou null se não encontrado
+    }
 
-@PutMapping("/id")
-public Produto atualizar (@PathVariable Long id, @RequestBody Produto novoProduto) {
-    return repository.findById(id).map(produto -> {
-        produto.setNome(novoProduto.getNome());
-        produto.setPreco(novoProduto.getPreco());
-        return repository.save(produto);
-    }).orElse(null);
-}
+    @PutMapping("/{id}") // Corrigido: "/id" para "/{id}"
+    public Produto atualizar(@PathVariable Long id, @RequestBody Produto novoProduto) {
+        return repository.findById(id).map(produto -> {
+            produto.setNome(novoProduto.getNome());
+            produto.setPreco(novoProduto.getPreco());
+            return repository.save(produto); // Atualiza o produto no banco de dados
+        }).orElse(null);
+    }
 
-@DeleteMapping("/{id}")
-public void excluir(@PathVariable Long id) {
-    repository.deleteById(id);
+    @DeleteMapping("/{id}")
+    public void excluir(@PathVariable Long id) {
+        repository.deleteById(id); // Exclui o produto pelo ID
+    }
 }

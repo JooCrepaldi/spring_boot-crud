@@ -1,8 +1,7 @@
 package com.bentao.api_produtos.repository;
 
-import java.util.list;
-
-import org.springframework.data.jpa.repository,JpaRepository;
+import java.util.List; // Corrigido: "List" com "L" maiúsculo
+import org.springframework.data.jpa.repository.JpaRepository; // Corrigido: ponto no lugar da vírgula
 
 import com.bentao.api_produtos.model.Produto;
 
