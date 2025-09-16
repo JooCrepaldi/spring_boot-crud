@@ -5,10 +5,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+@Entity //esse anotation reconhece que essa classe é uma entidade(tabela)
 public class Produto {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//autoencrementável
     private Long id;
     private String nome;
     private Double preco;
